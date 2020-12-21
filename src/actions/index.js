@@ -1,0 +1,1 @@
+//Interact with reduct store. Store all of our data in one place and access it
