@@ -10,7 +10,7 @@ export default class NavigationContainer extends Component {
   render() {
     return (
       <div>
-        <NavLink exact to="/">
+        <NavLink exact activeClassName="nav-link-active" to="/">
           Home
         </NavLink>
 

@@ -15,20 +15,21 @@ export default class App extends Component {
       <div className="app">
         <Router>
           <div>
+            <h1>Ciantera Rose React Portfolio</h1>
+            <div>{moment().format("MMMM do YYYY, hh:mm:ss a")}</div>
             <NavigationContainer />
 
             <Switch>
-              <Route exact path="/" activeClassName="nav-link-active" />
-              <Route exact path="/about-me" activeClassName="nav-link-active" />
-              <Route exact path="/contact" activeClassName="nav-link-active" />
-              <Route exact path="/blog" activeClassName="nav-link-active" />
+              <Route exact path="/" component={Home} />
+              <Route path="/about-me" component={About} />
+              <Route path="/contact" component={Contact} />
+              <Route exact path="/blog" component={Blog} />
+              <Route path="/blog/:id" component={Blog} />
             </Switch>
           </div>
         </Router>
 
-        <h1>Ciantera Rose React Portfolio</h1>
-        <div>{moment().format("MMMM do YYYY, hh:mm:ss a")}</div>
-        <PortfolioContainer />
+      
       </div>
     );
   }
