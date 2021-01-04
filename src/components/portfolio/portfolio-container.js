@@ -26,7 +26,6 @@ export default class PortfolioContainer extends Component {
                 return item.category === filter
             })
         })
-
     }
 
     portfolioItems() {
@@ -35,13 +34,18 @@ export default class PortfolioContainer extends Component {
         })
     }
 
-
+    handlePageTitleUpdate = () => {
+        this.setState({
+            pageTitle: "Something Else"
+        })
+    }
 
     render() {
         //conditional rendering
         if (this.state.isLoading) {
             return <div>Loading...</div>
         }
+
         return (
             <div>
                 <h2>{this.state.pageTitle}</h2>
