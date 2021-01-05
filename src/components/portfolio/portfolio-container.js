@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 import PortfolioItem from "./portfolio-item";
 export default class PortfolioContainer extends Component {
@@ -32,6 +33,19 @@ export default class PortfolioContainer extends Component {
     });
   }
 
+  getPortfolioItems = () => {
+    axios
+      .get("https://cianterarose.devcamp.space/portfolio/portfolio_items")
+      .then((response) => {
+        // handle success
+        console.log("response data", response);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+  };
+
   portfolioItems() {
     return this.state.data.map((item) => {
       return (
@@ -50,7 +64,9 @@ export default class PortfolioContainer extends Component {
     //conditional rendering
     if (this.state.isLoading) {
       return <div>Loading...</div>;
-    }
+    } 
+
+     this.getPortfolioItems();
 
     return (
       <div>
