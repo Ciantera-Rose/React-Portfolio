@@ -9,16 +9,7 @@ export default class PortfolioContainer extends Component {
     this.state = {
       pageTitle: "Welcome to my Portfolio",
       isLoading: false,
-      data: [
-        { title: "Quip", category: "eCommerce", slug: "Quip " },
-        { title: "Eventbrite", category: "Schedling", slug: "Eventbrite" },
-        {
-          title: "Ministry Safe",
-          category: "Enterprise",
-          slug: "Ministry-Safe",
-        },
-        { title: "Swing Away", category: "eCommerce", slug: "Swing-Away" },
-      ],
+      data: [],
     };
     // this.handlePageTitleUpdate =  this.handlePageTitleUpdate.bind(this)
     // Use arrow function vs function declaration for the same behavior
@@ -38,7 +29,9 @@ export default class PortfolioContainer extends Component {
       .get("https://cianterarose.devcamp.space/portfolio/portfolio_items")
       .then((response) => {
         // handle success
-        console.log("response data", response);
+        this.setState({
+          data: response.data.portfolio_items,
+        });
       })
       .catch((error) => {
         // handle error
@@ -48,8 +41,9 @@ export default class PortfolioContainer extends Component {
 
   portfolioItems() {
     return this.state.data.map((item) => {
+      console.log("item data", item);
       return (
-        <PortfolioItem title={item.title} url={"google.com"} slug={item.slug} />
+        <PortfolioItem title={item.name} url={item.url} slug={item.id} />
       );
     });
   }
@@ -59,14 +53,15 @@ export default class PortfolioContainer extends Component {
       pageTitle: "Something Else",
     });
   };
+  componentDidMount() {
+    this.getPortfolioItems();
+  }
 
   render() {
     //conditional rendering
     if (this.state.isLoading) {
       return <div>Loading...</div>;
-    } 
-
-     this.getPortfolioItems();
+    }
 
     return (
       <div>
