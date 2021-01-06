@@ -45,11 +45,6 @@ export default class PortfolioContainer extends Component {
     });
   }
 
-  handlePageTitleUpdate = () => {
-    this.setState({
-      pageTitle: "Something Else",
-    });
-  };
   componentDidMount() {
     this.getPortfolioItems();
   }

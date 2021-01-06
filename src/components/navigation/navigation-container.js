@@ -32,9 +32,6 @@ export default class NavigationContainer extends Component {
               Blog
             </NavLink>
           </div>
-
-          <button>Add Blog</button>
-          {false ? <button>AddBlog</button> : null}
         </div>
 
         <div className="right-side">CIANTERA ROSE</div>
