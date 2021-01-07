@@ -15,7 +15,6 @@ export default class App extends Component {
       <div className="container">
         <Router>
           <div>
-            <h1>Ciantera Rose React Portfolio</h1>
             <NavigationContainer />
 
             <Switch>

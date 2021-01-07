@@ -20,12 +20,11 @@
       text-decoration: none;
       &:hover {
         color: black;
+        border-bottom: 1px solid black;
       }
     }
 
-    &:hover {
-      border-bottom: 1px solid black;
-    }
+    //&:hover {}
 
     .nav-link-active {
       border-bottom: 1px solid black;
