@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import PortfolioItem from "./portfolio-item";
+import PortfolioItem from "./portfolio-item"
 
 export default class PortfolioContainer extends Component {
   constructor() {
@@ -12,9 +12,6 @@ export default class PortfolioContainer extends Component {
       isLoading: false,
       data: [],
     };
-    // this.handlePageTitleUpdate =  this.handlePageTitleUpdate.bind(this)
-    // Use arrow function vs function declaration for the same behavior
-    //this.handleFilter = this.handleFilter.bind(this)
   }
 
   handleFilter(filter) {
@@ -31,7 +28,7 @@ export default class PortfolioContainer extends Component {
       .then((response) => {
         // handle success
         this.setState({
-          data: response.data.portfolio_items,
+          data: response.data.portfolio_items
         });
       })
       .catch((error) => {
