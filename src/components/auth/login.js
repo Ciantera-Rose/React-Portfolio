@@ -19,7 +19,9 @@ export default class Login extends Component {
     }
 
     handleSubmit = (e) =>  {
-        console.log("handle submit", e)
+        console.log("handle submit", this.state.email, this.state.password)
+        e.preventDefault()
+
     }
 
     render() {
