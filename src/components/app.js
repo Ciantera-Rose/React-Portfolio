@@ -7,6 +7,7 @@ import Home from "./pages/home";
 import About from "./pages/about";
 import Contact from "./pages/contact";
 import Blog from "./pages/blog";
+import PortfolioManager from "./pages/portfolio-manager";
 import PortfolioDetail from "./portfolio/portfolio-detail";
 import Auth from "./pages/auth";
 import NoMatch from "./pages/no-match";
@@ -44,12 +45,12 @@ export default class App extends Component {
         withCredentials: true,
       })
       .then((response) => {
-        const loggedIn = response.data.logged_in;
-        const loggedInStatus = this.state.loggedInStatus;
+        const loggedIn = response.data.logged_in; // the response from the API
+        const loggedInStatus = this.state.loggedInStatus; // the state
 
         // If loggedIn and the status is LOGGED_IN => return the data
         // If loggedIn status NOT_LOGGED_IN => update state
-        // If not logged in and status LOGGED_IN => update state
+        // If not logged in and status LOGGED_IN => update state to logout
 
         if (loggedIn && loggedInStatus === "LOGGED_IN") {
           return loggedIn;
@@ -65,7 +66,7 @@ export default class App extends Component {
       })
       .catch((error) => {
         console.log("Error", error);
-      });
+      }); //catches error with the server / API call
   }
 
   componentDidMount() {
@@ -73,7 +74,7 @@ export default class App extends Component {
   }
 
   authorizedPages() {
-    return [<Route path="/blog" component={Blog} />];
+    return <Route path="/portfolio-manager" component={PortfolioManager} />;
   }
   render() {
     return (
@@ -84,8 +85,6 @@ export default class App extends Component {
               loggedInStatus={this.state.loggedInStatus}
               handleSuccessfulLogout={this.handleSuccessfulLogout}
             />
-
-            <h2>{this.state.loggedInStatus}</h2>
 
             <Switch>
               <Route exact path="/" component={Home} />
@@ -103,6 +102,7 @@ export default class App extends Component {
 
               <Route path="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
+              <Route path="/blog" component={Blog} />
               {this.state.loggedInStatus === "LOGGED_IN"
                 ? this.authorizedPages()
                 : null}
