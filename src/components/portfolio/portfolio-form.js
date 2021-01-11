@@ -8,7 +8,7 @@ export default class PortfolioForm extends Component {
     this.state = {
       name: "",
       description: "",
-      category: "",
+      category: "eCommerce",
       position: "",
       url: "",
       thumb_image: "",
@@ -93,8 +93,10 @@ export default class PortfolioForm extends Component {
               name="category"
               value={this.state.category}
               onChange={this.handleChange}
+              // state only updates when a change occurs but default is set to empty string
             >
               <option value="eCommerce">eCommerce</option>
+              {/* defaults in a form do not get pushed up */}
               <option value="Scheduling">Scheduling</option>
               <option value="Enterprise">Enterprise</option>
             </select>
