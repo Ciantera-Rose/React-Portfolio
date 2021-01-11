@@ -25,14 +25,12 @@ export default class PortfolioManager extends Component {
         `https://api.devcamp.space/portfolio/portfolio_items/${portfolioItem.id}`,
         { withCredentials: true }
       )
-      .then((response) => {
+      .then(() => {
         this.setState({
           portfolioItems: this.state.portfolioItems.filter((item) => {
             return item.id !== portfolioItem.id;
           }),
         });
-
-        return response.data;
       })
       .catch((error) => {
         console.log("handleDeleteClick error", error);
