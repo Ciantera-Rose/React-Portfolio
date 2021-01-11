@@ -95,6 +95,7 @@ export default class PortfolioForm extends Component {
   }
   //console.log("handle change", event); state is being updated. Handle change allows us to access target
   handleSubmit(event) {
+    event.preventDefault();
     // https://cianterarose.devcamp.space/portfolio/portfolio_items
     axios
       .post(
@@ -106,7 +107,7 @@ export default class PortfolioForm extends Component {
         this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
         //console.log("response", response);
 
-        this.setState = {
+        this.setState({
           name: "",
           description: "",
           category: "eCommerce",
@@ -115,8 +116,7 @@ export default class PortfolioForm extends Component {
           thumb_image: "",
           banner_image: "",
           logo: "",
-        };
-        //Attributes
+        });
 
         [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {
           ref.current.dropzone.removeAllFiles(); //DOM Node Elements
@@ -128,7 +128,6 @@ export default class PortfolioForm extends Component {
 
     //this.buildForm();
     //console.log("event", event); // SyntheticEvent happens in the virtual DOM and appears like a real event
-    event.preventDefault();
   }
   render() {
     return (
