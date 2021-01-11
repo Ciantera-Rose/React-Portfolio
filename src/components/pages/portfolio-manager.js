@@ -19,6 +19,10 @@ export default class PortfolioManager extends Component {
   }
 
   handleSuccessfulFormSubmission(portfolioItem) {
+    this.setState({
+      portfolioItems: [portfolioItem].concat(this.state.portfolioItems),
+    });
+    //console.log("handleSuccessfulFormSubmission", portfolioItem);
     // TODO
     // update thhe portfolioItems state
     // and add the portfolioItem to the list
@@ -30,9 +34,12 @@ export default class PortfolioManager extends Component {
 
   getPortfolioItems() {
     axios
-      .get("https://cianterarose.devcamp.space/portfolio/portfolio_items", {
-        withCredentials: true,
-      })
+      .get(
+        "https://cianterarose.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc",
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         this.setState({
           portfolioItems: [...response.data.portfolio_items],
