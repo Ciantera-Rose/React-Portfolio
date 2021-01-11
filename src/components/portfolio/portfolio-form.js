@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class PortfolioForm extends Component {
   constructor(props) {
@@ -35,11 +36,24 @@ export default class PortfolioForm extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
-    //console.log("handle change", event); state is being updated
   }
-
+  //console.log("handle change", event); state is being updated. Handle change allows us to access target
   handleSubmit(event) {
-    this.buildForm();
+    // https://cianterarose.devcamp.space/portfolio/portfolio_items
+    axios
+      .post(
+        "https://cianterarose.devcamp.space/portfolio/portfolio_items",
+        this.buildForm(),
+        { withCredentials: true }
+      )
+      .then((response) => {
+        console.log("response", response);
+      })
+      .catch((error) => {
+        console.log("portfolio form handleSubmit error", error);
+      });
+
+    //this.buildForm();
     //console.log("event", event); // SyntheticEvent happens in the virtual DOM and appears like a real event
     event.preventDefault();
   }
