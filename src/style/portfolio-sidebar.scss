@@ -1,20 +1,19 @@
 .portfolio-sidebar-list-wrapper {
   .portfolio-item-thumb {
     padding: 21px;
-    background-color: rgb(170, 172, 169);
 
     .portfolio-thumb-img img {
       width: 100%;
     }
 
     .title {
-      color: $warning;
+      color: $offwhite;
       font-size: 1.3rem;
     }
 
     .id {
       font-size: 1rem;
-      color: $charcoal;
+      color: black;
     }
   }
 }
