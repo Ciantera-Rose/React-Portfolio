@@ -8,7 +8,7 @@ const PortfolioSidebarList = (props) => {
           <img src={portfolioItem.thumb_image_url} />
         </div>
         <h1 className="title">{portfolioItem.name}</h1>
-        <h2>{portfolioItem.id}</h2>
+        <h2 className="id">{portfolioItem.id}</h2>
       </div>
     );
   });
