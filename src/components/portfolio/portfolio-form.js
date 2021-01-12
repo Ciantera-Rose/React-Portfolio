@@ -18,6 +18,9 @@ export default class PortfolioForm extends Component {
       thumb_image: "",
       banner_image: "",
       logo: "",
+      editMode: false,
+      apiUrl: "https://cianterarose.devcamp.space/portfolio/portfolio_items",
+      apiAction: "post",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -56,6 +59,9 @@ export default class PortfolioForm extends Component {
         category: category || "eCommerce",
         position: position || "",
         url: url || "",
+        editMode: true,
+        apiUrl: `https://cianterarose.devcamp.space/portfolio/portfolio_items/${id}`,
+        apiAction: "patch",
       });
     }
   }
@@ -124,15 +130,18 @@ export default class PortfolioForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     // https://cianterarose.devcamp.space/portfolio/portfolio_items
-    axios
-      .post(
-        "https://cianterarose.devcamp.space/portfolio/portfolio_items",
-        this.buildForm(),
-        { withCredentials: true }
-      )
+    axios({
+      method: this.state.apiAction,
+      url: this.state.apiUrl,
+      data: this.buildForm(),
+      withCredentials: true,
+    })
       .then((response) => {
-        this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
-        //console.log("response", response);
+        if (this.state.editMode) {
+          this.props.handleEditFormSubmission();
+        } else {
+          this.props.handleNewFormSubmission(response.data.portfolio_item);
+        }
 
         this.setState({
           name: "",
@@ -143,6 +152,10 @@ export default class PortfolioForm extends Component {
           thumb_image: "",
           banner_image: "",
           logo: "",
+          editMode: false,
+          apiUrl:
+            "https://cianterarose.devcamp.space/portfolio/portfolio_items",
+          apiAction: "post",
         });
 
         [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {
