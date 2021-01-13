@@ -2,6 +2,8 @@ import { faBoxTissue } from "@fortawesome/free-solid-svg-icons";
 import React, { Component } from "react";
 import ReactModal from "react-modal";
 
+ReactModal.setAppElement(".app-wrapper");
+
 export default class BlogModal extends Component {
   constructor(props) {
     super(props);
