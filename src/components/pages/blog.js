@@ -21,6 +21,11 @@ class Blog extends Component {
 
   activateInfiniteScroll() {
     window.onscroll = () => {
+      if (
+        this.state.isLoading ||
+        this.state.blogItems.length === this.state.totalCount
+      ) {
+      }
       console.log("window.innerHeight", window.innerHeight);
 
       console.log(
@@ -35,7 +40,8 @@ class Blog extends Component {
         window.innerHeight + document.documentElement.scrollTop ===
         document.documentElement.offsetHeight
       ) {
-        console.log("get more posts");
+        this.getBlogItems();
+        //console.log("get more posts");
       }
     };
   }
@@ -45,12 +51,16 @@ class Blog extends Component {
       currentPage: this.state.currentPage + 1,
     });
     axios
-      .get("https://cianterarose.devcamp.space/portfolio/portfolio_blogs", {
-        withCredentials: true,
-      })
+      .get(
+        `https://cianterarose.devcamp.space/portfolio/portfolio_blogs?page=${this.state.currentPage}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
+        console.log("getting", response.data);
         this.setState({
-          blogItems: response.data.portfolio_blogs,
+          blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
           totalCount: response.data.meta.total_records,
           isLoading: false,
         });
