@@ -54,6 +54,7 @@ class Blog extends Component {
   getBlogItems() {
     this.setState({
       currentPage: this.state.currentPage + 1,
+      isLoading: true,
     });
     axios
       .get(
@@ -72,6 +73,9 @@ class Blog extends Component {
       })
       .catch((error) => {
         console.log("getBlogItem error", error);
+        this.setState({
+          isLoading: false,
+        });
       });
   }
 
