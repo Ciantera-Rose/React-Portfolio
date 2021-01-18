@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import DropzoneComponent from "react-dropzone-component";
 
+import filepickerCss from "../../../node_modules/react-dropzone-component/styles/filepicker.css";
+import dropzoneCss from "../../../node_modules/dropzone/dist/min/dropzone.min.css";
+
 import RichTextEditor from "../forms/rich-text-editor";
 
 export default class BlogForm extends Component {
@@ -39,7 +42,6 @@ export default class BlogForm extends Component {
       )
       .then((response) => {
         this.props.handleFeaturedImageDelete();
-        console.log("Response from blog image delete", response);
       })
       .catch((error) => {
         console.log("deleteImage error", error);
@@ -102,7 +104,6 @@ export default class BlogForm extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
     axios({
       method: this.state.apiAction,
       url: this.state.apiUrl,
@@ -125,15 +126,16 @@ export default class BlogForm extends Component {
           // Update blog detail
           this.props.handleUpdateFormSubmission(response.data.portfolio_blog);
         } else {
-          this.props.handleSuccessfulFormSubmission(
+          this.props.handleSuccessfullFormSubmission(
             response.data.portfolio_blog
           );
         }
       })
-
       .catch((error) => {
         console.log("handleSubmit for blog error", error);
       });
+
+    event.preventDefault();
   }
 
   handleChange(event) {
@@ -166,10 +168,10 @@ export default class BlogForm extends Component {
         <div className="one-column">
           <RichTextEditor
             handleRichTextEditorChange={this.handleRichTextEditorChange}
-            editMode={this.props.editMode}
+            editMode={this.props.editMode || null}
             contentToEdit={
               this.props.editMode && this.props.blog.content
-                ? this.props.blog.contnet
+                ? this.props.blog.content
                 : null
             }
           />
@@ -181,7 +183,7 @@ export default class BlogForm extends Component {
               <img src={this.props.blog.featured_image_url} />
 
               <div className="image-removal-link">
-                <a onClick={() => this.deleteImage("featured-image")}>
+                <a onClick={() => this.deleteImage("featured_image")}>
                   Remove file
                 </a>
               </div>

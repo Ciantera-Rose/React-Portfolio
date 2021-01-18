@@ -17,12 +17,6 @@ export default class PortfolioItem extends Component {
   handleMouseLeave() {
     this.setState({ portfolioItemClass: "" });
   }
-  // Data that we'll need
-  // - background image: thumb_image_url
-  // - logo
-  // - description: description
-  // - id: id
-  // - Leverage destructuring(have an object, pull out the keys and automatically assign them to variables)
 
   render() {
     const { id, description, thumb_image_url, logo_url } = this.props.item;
@@ -33,7 +27,6 @@ export default class PortfolioItem extends Component {
           onMouseEnter={() => this.handleMouseEnter()}
           onMouseLeave={() => this.handleMouseLeave()}
         >
-          {/* <h1>{this.state.portfolioItemsClass}</h1> */}
           <div
             className={
               "portfolio-img-background " + this.state.portfolioItemClass

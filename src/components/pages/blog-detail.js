@@ -22,7 +22,7 @@ export default class BlogDetail extends Component {
   }
 
   handleUpdateFormSubmission(blog) {
-    thhis.setState({
+    this.setState({
       blogItem: blog,
       editMode: false,
     });
